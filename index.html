@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Prix Juste | Le jeu</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <div id="container">
+        
+        <div id="logo">
+            <h1>LE</h1>
+        </div>
+        <h3 id="title-rules">Les règles:</h3>
+        <ul>
+            <li>Vous devez deviner un nombre entre <strong>1</strong> et <strong>100</strong>.</li>
+            <li>Vous avez <strong>8 vies</strong>, si vous perdez vos <strong>8 vies</strong> c’est  la fin du jeu.</li>
+        </ul>
+        <div id="game">
+            <p id="title-life">Vous avez <span style="color: blue;" id="life">8</span> vies</p>
+            <p id="response"></p>
+            <div>
+                <form>
+                    <label id="label-price" for="price">Veuillez entrer un prix</label><br>
+                    <input required type="text" placeholder="50" name="price" id="price">
+                    <p id="error"> </p>
+                    <button type="button" id="validation" onclick="justePrix()">Valider</button>
+                </form>
+                
+                
+            </div>
+            
+
+        </div>
+        <div id="game-result" style="display: none;">
+            <h2 id="game-result-title"></h2>
+            <p id="response-result"></p>
+            <button id="restart-game" onclick="restartGame()">Redémarrer le jeu</button>
+        </div>
+    </div>
+
+    <script src="./assets/scripts/script.js"></script>
+</body>
+
+</html>
