@@ -166,4 +166,14 @@ form {
         width: 184px;
         height: 184px;
     }
+    form{
+        margin-top: 3em;
+    }
+    #price{
+        width: 416px;
+        margin-left: 8.5em;
+    }
+    #game-result{
+        margin-top: 3em;
+    }
 }
