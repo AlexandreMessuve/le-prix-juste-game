@@ -9,6 +9,7 @@ body {
     width: 100%;
     height: auto;
     text-align: center;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -98,6 +99,7 @@ form {
     border-radius: 20px;
     border: 1px solid #E2E1E5;
     background: #FFF;
+    appearance: textfield;
 }
 
 #error {
@@ -172,6 +174,16 @@ form {
     #price{
         width: 416px;
         margin-left: 8.5em;
+    }
+    #error {
+        font-size: 14px;
+        margin-right: 0;
+    }
+    #validation{
+        width: 100px;
+    }
+    #restart-game{
+        width: 250px;
     }
     #game-result{
         margin-top: 3em;
