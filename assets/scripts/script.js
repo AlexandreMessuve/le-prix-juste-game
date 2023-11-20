@@ -10,81 +10,62 @@ input.addEventListener('keypress', function (event) {
     }
 });
 
+function getColor(life) {
+    if (life > 6) return "blue";
+    if (life > 4) return "green";
+    if (life > 2) return "orange";
+    if (life <= 2) return "red";
+    return "";
+}
+
+function updateLife(life, color) {
+    const titleLife = document.getElementById('title-life');
+    titleLife.innerHTML = `Vous avez <span style="color:${color};" id="life">${life}</span> ${life > 1 ? 'vies' : 'vie'}`;
+}
+
+function endGame(message, color, title) {
+    const idGame = document.getElementById('game');
+    const idGameResult = document.getElementById('game-result');
+    const idResponseResult = document.getElementById('response-result');
+    const idGameResultTitle = document.getElementById('game-result-title');
+
+    idGame.style.display = "none";
+    idGameResult.style.display = "block";
+    idResponseResult.innerText = message;
+    idGameResultTitle.style.color = color;
+    idGameResultTitle.innerText = title;
+}
+
 function justePrix() {
     let message = "";
-    let valueOfUser = document.getElementById('price').value;
-    let idResponse = document.getElementById('response');
-    let idLife = document.getElementById('life');
-    let life = idLife.innerHTML;
-    let idGame = document.getElementById('game');
-    let idGameResult = document.getElementById('game-result');
-    let idResponseResult = document.getElementById('response-result');
-    let idGameResultTitle = document.getElementById('game-result-title');
-    const titleLife = document.getElementById('title-life');
-    let idError = document.getElementById('error');
-    let color = "";
-    let titleResult = '';
+    let valueOfUser = parseInt(document.getElementById('price').value);
+    let life = parseInt(document.getElementById('life').innerHTML);
+    const idResponse = document.getElementById('response');
+    const idError = document.getElementById('error');
+
     idError.innerHTML = "";
     document.getElementById('price').value = "";
 
-    life = parseInt(life);
-    valueOfUser = parseInt(valueOfUser);
-    if (!isNaN(valueOfUser)) {
-        if (life > 0) {
-            if (PRICE === valueOfUser) {
-                titleResult = 'Fécilitation vous avez gagné !';
-                message = `le prix était de ${PRICE}\n il vous reste ${life} vies`;
-                idGame.style.display = 'none';
-                idGameResult.style.display = 'block';
-                idGameResultTitle.innerText = titleResult;
-                idResponseResult.innerText = message;
-                idGameResultTitle.style.color = "green";
-            } else if (valueOfUser < PRICE) {
-                message = "C'est plus !";
-                life--;
-            } else if (valueOfUser > PRICE) {
-                message = "C'est moins !";
-                life--;
-            }
-
-            switch (true) {
-                case life > 6:
-                    color = "blue";
-                    break;
-                case life > 4 && parseInt(life) <= 6:
-                    color = "green";
-                    break;
-                case life > 2 && parseInt(life) <= 4:
-                    color = "orange";
-                    break;
-
-                case parseInt(life) === 2:
-                    color = "red";
-                    break;
-            }
-
-            titleLife.innerHTML = `Vous avez <span style="color:${color};" id="life">${life}</span> vies`;
-            idResponse.innerText = message;
-        }
-
-    } else {
+    if (isNaN(valueOfUser)) {
         idError.innerText = "Veuillez entrer un entier !";
+        return;
     }
 
-
-    if (life === 1) {
-        titleLife.innerHTML = `Vous avez <span style="color:red;" id="life">${life}</span> vie`;
-
+    if (PRICE === valueOfUser) {
+        message = `le prix était de ${PRICE}\n il vous reste ${life} ${life > 1 ? 'vies' : 'vie'}`;
+        endGame(message, "green", 'Fécilitation vous avez gagné !');
+        return;
     }
-    if (life === 0) {
-        titleResult = 'Vous avez perdu !';
-        message = `Le prix était de ${PRICE}`;
-        idGame.style.display = "none";
-        idGameResult.style.display = "block";
-        idResponseResult.innerText = message;
-        idGameResultTitle.style.color = "red";
-        idGameResultTitle.innerText = titleResult;
+
+    message = valueOfUser < PRICE ? "C'est plus !" : "C'est moins !";
+    life--;
+    if (life <= 0) {
+        endGame(`Le prix était de ${PRICE}`, "red", 'Vous avez perdu !');
+        return;
     }
+    const color = getColor(life);
+    updateLife(life, color);
+    idResponse.innerText = message;
 }
 
 function restartGame() {
