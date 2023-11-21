@@ -1,6 +1,8 @@
 let temp = parseInt(Math.random()* 100);
 const PRICE = priceValue(temp);
+alert(PRICE);
 let input = document.getElementById('price');
+
 
 input.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
@@ -11,11 +13,10 @@ input.addEventListener('keypress', function (event) {
 });
 
 function priceValue(price){
-    if(price === 0){
-        return 1;
-    }else{
-        return price;
+    while (price === 0){
+        price = parseInt(Math.random()* 100);
     }
+    return price;
 }
 
 //fonction qui permet de retourner la couleur a mettre sur la vie
