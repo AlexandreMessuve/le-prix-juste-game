@@ -1,6 +1,5 @@
 let temp = parseInt(Math.random()* 100);
 const PRICE = priceValue(temp);
-alert(PRICE);
 let input = document.getElementById('price');
 
 
