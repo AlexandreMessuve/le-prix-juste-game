@@ -1,5 +1,5 @@
-const PRICE = parseInt(Math.random() * 100);
-
+let temp = parseInt(Math.random()* 100);
+const PRICE = priceValue(temp);
 let input = document.getElementById('price');
 
 input.addEventListener('keypress', function (event) {
@@ -10,6 +10,15 @@ input.addEventListener('keypress', function (event) {
     }
 });
 
+function priceValue(price){
+    if(price === 0){
+        return 1;
+    }else{
+        return price;
+    }
+}
+
+//fonction qui permet de retourner la couleur a mettre sur la vie
 function getColor(life) {
     if (life > 6) return "blue";
     if (life > 4) return "green";
@@ -18,11 +27,13 @@ function getColor(life) {
     return "";
 }
 
+//fonction qui modifie la couleur et le nombre de vie
 function updateLife(life, color) {
     const titleLife = document.getElementById('title-life');
     titleLife.innerHTML = `Vous avez <span style="color:${color};" id="life">${life}</span> ${life > 1 ? 'vies' : 'vie'}`;
 }
 
+//fonction qui envoie le message de fin de jeu
 function endGame(message, color, title) {
     const idGame = document.getElementById('game');
     const idGameResult = document.getElementById('game-result');
